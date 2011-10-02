@@ -3,43 +3,16 @@ include 'php-ofc-library/open-flash-chart.php';
 include_once 'functions.php';
 
 $result=nactiDb();
-//print_r($result);
+
 //print_r($result);
 
 $graf=new open_flash_chart();
 
 
 $title = new title("Slevomat" );
-$line=new scatter_line('#DB1750', 3);
-echo count($result['datumy']);
-$pocitadlo=0;
-while($pocitadlo<=count($result['datumy'])){
-     next($result);
-     $xLine=strtotime($result['datumy'][$pocitadlo]);
-     $yLine=$result['penize'][$pocitadlo];
-     $dataLinky[]=new scatter_value($xLine,$yLine);
-     $pocitadlo++;
-}
-print_r($dataLinky);
-/*@todo Dodělat cyklus */
 
-//$dataLinky=new scatter_value();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//$bar->set_values($result['penize'] );
+$bar = new line();
+$bar->set_values($result['penize'] );
 
 //$chart = new open_flash_chart();
 $graf->set_title( $title );
@@ -72,7 +45,7 @@ $x->set_offset(true);
 
 $graf->set_y_axis( $y );
 $graf->set_x_axis($x);
-$graf->add_element( $line);
+$graf->add_element( $bar );
                     
 echo $graf->toPrettyString();
 ?>
